@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { format } from 'date-fns';
 import { useMemo } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View, useColorScheme } from 'react-native';
@@ -9,6 +10,7 @@ import { getStreak, isComplete, isDue } from '@/lib/streak';
 import { useHabitStore } from '@/store/useHabitStore';
 
 export default function TodayScreen() {
+  const router = useRouter();
   const dark = useColorScheme() === 'dark';
   const habits = useHabitStore((s) => s.habits);
   const logs = useHabitStore((s) => s.logs);
@@ -65,6 +67,7 @@ export default function TodayScreen() {
                   onToggle={() => toggleDay(item.id, todayKey)}
                   onIncrement={() => increment(item.id, todayKey)}
                   onDecrement={() => decrement(item.id, todayKey)}
+                  onPress={() => router.push(`/habit/${item.id}`)}
                 />
               </GlassCard>
             </View>

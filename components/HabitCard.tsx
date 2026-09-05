@@ -10,9 +10,10 @@ interface Props {
   onToggle: () => void;
   onIncrement: () => void;
   onDecrement: () => void;
+  onPress?: () => void;
 }
 
-export default function HabitCard({ habit, count, streak, onToggle, onIncrement, onDecrement }: Props) {
+export default function HabitCard({ habit, count, streak, onToggle, onIncrement, onDecrement, onPress }: Props) {
   const target = Math.max(1, habit.timesPerDay);
   const done = count >= target;
   const isCounter = target > 1;
@@ -30,7 +31,7 @@ export default function HabitCard({ habit, count, streak, onToggle, onIncrement,
 
   return (
     <View style={styles.row}>
-      <View style={styles.left}>
+      <Pressable style={styles.left} onPress={onPress} disabled={!onPress}>
         {habit.emoji ? <Text style={styles.emoji}>{habit.emoji}</Text> : null}
         <View style={styles.meta}>
           <Text style={[styles.name, { color: ink }]} numberOfLines={1}>
@@ -46,7 +47,7 @@ export default function HabitCard({ habit, count, streak, onToggle, onIncrement,
             ) : null}
           </View>
         </View>
-      </View>
+      </Pressable>
       {isCounter ? (
         <View style={styles.counter}>
           <Pressable
