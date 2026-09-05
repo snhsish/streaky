@@ -111,6 +111,9 @@ export default function HabitDetailScreen() {
         </GlassCard>
       </View>
       <View style={styles.actions}>
+        <Pressable style={[styles.actionBtn, styles.secondaryBtn]} onPress={() => router.push(`/create?id=${habit.id}`)}>
+          <Text style={[styles.secondaryBtnText, { color: ink }]}>Edit</Text>
+        </Pressable>
         <Pressable style={[styles.actionBtn, styles.secondaryBtn]} onPress={() => archiveHabit(habit.id, !habit.archived)}>
           <Text style={[styles.secondaryBtnText, { color: ink }]}>{habit.archived ? 'Unarchive' : 'Archive'}</Text>
         </Pressable>

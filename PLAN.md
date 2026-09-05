@@ -99,7 +99,7 @@ Grid cell: `count > 0 → fill habit.color, else translucent white/black (theme 
 - [x] 0 — Init: `create-expo-app` tabs + TS, NativeWind, MMKV, Zustand, lucide, reanimated, date-fns
 - [x] 1 — Store + Today toggle (MMKV persist)
 - [x] 2 — ContributionGrid + detail screen
-- [ ] 3 — Create/edit (emoji + color picker, flexible frequency)
+- [x] 3 — Create/edit (emoji + color picker, flexible frequency)
 - [ ] 4 — Reminders + stats
 - [ ] 5 — Polish B/W glass theme + JSON export (Drive hook later)
 

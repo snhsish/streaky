@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { format } from 'date-fns';
+import { Plus } from 'lucide-react-native';
 import { useMemo } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View, useColorScheme } from 'react-native';
 import GlassCard from '@/components/GlassCard';
@@ -36,7 +37,16 @@ export default function TodayScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: dark ? '#000' : '#fff' }]}>
-      <Text style={[styles.title, { color: ink }]}>Today</Text>
+      <View style={styles.headerRow}>
+        <Text style={[styles.title, { color: ink }]}>Today</Text>
+        <Pressable
+          accessibilityLabel="Add habit"
+          onPress={() => router.push('/create')}
+          style={[styles.addBtn, { borderColor: 'rgba(128,128,128,0.35)' }]}
+        >
+          <Plus size={20} color={ink} />
+        </Pressable>
+      </View>
       <Text style={[styles.subtitle, { color: sub }]}>
         {format(today, 'EEEE, MMM d')} · {doneCount}/{due.length} done
       </Text>
@@ -84,9 +94,22 @@ const styles = StyleSheet.create({
     paddingTop: 64,
     paddingHorizontal: 16,
   },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   title: {
     fontSize: 28,
     fontWeight: '800',
+  },
+  addBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   subtitle: {
     fontSize: 14,
