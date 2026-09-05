@@ -100,7 +100,7 @@ Grid cell: `count > 0 → fill habit.color, else translucent white/black (theme 
 - [x] 1 — Store + Today toggle (MMKV persist)
 - [x] 2 — ContributionGrid + detail screen
 - [x] 3 — Create/edit (emoji + color picker, flexible frequency)
-- [ ] 4 — Reminders + stats
+- [x] 4 — Reminders + stats
 - [ ] 5 — Polish B/W glass theme + JSON export (Drive hook later)
 
 ## Commands (after init)

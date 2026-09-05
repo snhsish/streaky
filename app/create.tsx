@@ -5,6 +5,7 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View, useColorSchem
 import ColorDotPicker from '@/components/ColorDotPicker';
 import EmojiPicker from '@/components/EmojiPicker';
 import GlassCard from '@/components/GlassCard';
+import { cancelHabitReminders, scheduleHabitReminder } from '@/lib/notifications';
 import { useHabitStore } from '@/store/useHabitStore';
 import type { Frequency } from '@/store/useHabitStore';
 
@@ -57,7 +58,7 @@ export default function CreateHabitScreen() {
     return { kind: 'xPerWeek', target };
   };
 
-  const save = () => {
+  const save = async () => {
     const trimmed = name.trim();
     if (!trimmed) {
       setError('Give your habit a name.');
@@ -78,25 +79,36 @@ export default function CreateHabitScreen() {
       return;
     }
     setError('');
+    const payload = {
+      name: trimmed,
+      emoji: emoji || undefined,
+      color,
+      frequency,
+      timesPerDay: Math.max(1, Math.floor(timesPerDay)),
+      reminderTime: cleanReminder || undefined,
+    };
     if (editing) {
-      updateHabit(editing.id, {
-        name: trimmed,
-        emoji: emoji || undefined,
-        color,
-        frequency,
-        timesPerDay: Math.max(1, Math.floor(timesPerDay)),
-        reminderTime: cleanReminder || undefined,
-      });
+      updateHabit(editing.id, payload);
+      const updated = { ...editing, ...payload };
+      if (cleanReminder) {
+        const ok = await scheduleHabitReminder(updated);
+        if (!ok) {
+          setError('Reminder saved, but notifications permission was denied.');
+          return;
+        }
+      } else {
+        await cancelHabitReminders(editing.id);
+      }
       router.back();
     } else {
-      const habit = addHabit({
-        name: trimmed,
-        emoji: emoji || undefined,
-        color,
-        frequency,
-        timesPerDay: Math.max(1, Math.floor(timesPerDay)),
-        reminderTime: cleanReminder || undefined,
-      });
+      const habit = addHabit(payload);
+      if (cleanReminder) {
+        const ok = await scheduleHabitReminder(habit);
+        if (!ok) {
+          setError('Habit created, but notifications permission was denied.');
+          return;
+        }
+      }
       router.replace(`/habit/${habit.id}`);
     }
   };

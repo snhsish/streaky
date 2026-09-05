@@ -5,6 +5,7 @@ import ContributionGrid from '@/components/ContributionGrid';
 import GlassCard from '@/components/GlassCard';
 import HabitCard from '@/components/HabitCard';
 import { toDayKey } from '@/lib/dates';
+import { cancelHabitReminders, scheduleHabitReminder } from '@/lib/notifications';
 import { getStreak, isComplete } from '@/lib/streak';
 import { useHabitStore } from '@/store/useHabitStore';
 
@@ -60,6 +61,7 @@ export default function HabitDetailScreen() {
         text: 'Delete',
         style: 'destructive',
         onPress: () => {
+          void cancelHabitReminders(habit.id);
           removeHabit(habit.id);
           router.back();
         },
@@ -114,7 +116,15 @@ export default function HabitDetailScreen() {
         <Pressable style={[styles.actionBtn, styles.secondaryBtn]} onPress={() => router.push(`/create?id=${habit.id}`)}>
           <Text style={[styles.secondaryBtnText, { color: ink }]}>Edit</Text>
         </Pressable>
-        <Pressable style={[styles.actionBtn, styles.secondaryBtn]} onPress={() => archiveHabit(habit.id, !habit.archived)}>
+        <Pressable
+          style={[styles.actionBtn, styles.secondaryBtn]}
+          onPress={() => {
+            const next = !habit.archived;
+            archiveHabit(habit.id, next);
+            if (next) void cancelHabitReminders(habit.id);
+            else void scheduleHabitReminder(habit);
+          }}
+        >
           <Text style={[styles.secondaryBtnText, { color: ink }]}>{habit.archived ? 'Unarchive' : 'Archive'}</Text>
         </Pressable>
         <Pressable style={[styles.actionBtn, styles.dangerBtn]} onPress={confirmDelete}>
