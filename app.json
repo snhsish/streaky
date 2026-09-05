@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "streaky-tmp",
-    "slug": "streaky-tmp",
+    "name": "Streaky",
+    "slug": "streaky",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "streakytmp",
+    "scheme": "streaky",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true
