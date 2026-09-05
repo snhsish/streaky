@@ -1,4 +1,5 @@
-import { Pressable, StyleSheet, Text, View, useColorScheme } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useColorScheme } from './useColorScheme';
 
 const PRESETS = ['📚', '💧', '🏋️', '🧘', '🏃', '💤', '🥗', '📝', '🎸', '🧹', '💰', '📵', '🌱', '🔥', '⭐', '🎯'];
 

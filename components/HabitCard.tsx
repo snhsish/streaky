@@ -1,6 +1,7 @@
 import * as Haptics from 'expo-haptics';
 import { Check, Flame, Minus, Plus } from 'lucide-react-native';
-import { Pressable, StyleSheet, Text, View, useColorScheme } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useColorScheme } from './useColorScheme';
 import type { Habit } from '../store/useHabitStore';
 
 interface Props {

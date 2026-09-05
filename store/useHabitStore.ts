@@ -40,6 +40,7 @@ interface HabitState {
   increment: (habitId: string, dayKey?: string) => void;
   decrement: (habitId: string, dayKey?: string) => void;
   clearAll: () => void;
+  restore: (habits: Habit[], logs: Logs) => void;
 }
 
 export const useHabitStore = create<HabitState>()(
@@ -102,6 +103,7 @@ export const useHabitStore = create<HabitState>()(
         get().setCount(habitId, dayKey, cur - 1);
       },
       clearAll: () => set({ habits: [], logs: {} }),
+      restore: (habits, logs) => set({ habits, logs }),
     }),
     {
       name: 'streaky-store',

@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useMemo } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View, useColorScheme } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useColorScheme } from '@/components/useColorScheme';
 import ContributionGrid from '@/components/ContributionGrid';
 import GlassCard from '@/components/GlassCard';
 import { getStreak } from '@/lib/streak';

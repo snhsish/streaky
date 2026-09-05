@@ -1,7 +1,8 @@
 import * as Haptics from 'expo-haptics';
 import { addDays, startOfWeek } from 'date-fns';
 import { useMemo } from 'react';
-import { Pressable, StyleSheet, View, useColorScheme } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { useColorScheme } from './useColorScheme';
 import { toDayKey } from '../lib/dates';
 import { isComplete } from '../lib/streak';
 import type { Habit } from '../store/useHabitStore';

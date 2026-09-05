@@ -8,6 +8,7 @@ import '../global.css';
 import { setupNotifications } from '@/lib/notifications';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import { StatusBar } from 'expo-status-bar';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -47,6 +48,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const dark = colorScheme === 'dark';
   const router = useRouter();
 
   useEffect(() => {
@@ -59,8 +61,15 @@ function RootLayoutNav() {
   }, [router]);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+    <ThemeProvider value={dark ? DarkTheme : DefaultTheme}>
+      <StatusBar style={dark ? 'light' : 'dark'} />
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: dark ? '#000' : '#fff' },
+          headerTintColor: dark ? '#fff' : '#111',
+          contentStyle: { backgroundColor: dark ? '#000' : '#fff' },
+        }}
+      >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="habit/[id]" options={{ title: 'Habit' }} />
         <Stack.Screen name="create" options={{ title: 'New habit', presentation: 'modal' }} />

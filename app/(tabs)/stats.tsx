@@ -1,7 +1,8 @@
 import { useRouter } from 'expo-router';
 import { addDays } from 'date-fns';
 import { useMemo } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View, useColorScheme } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useColorScheme } from '@/components/useColorScheme';
 import GlassCard from '@/components/GlassCard';
 import { toDayKey } from '@/lib/dates';
 import { getStreak, isComplete, isDue } from '@/lib/streak';

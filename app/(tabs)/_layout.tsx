@@ -1,9 +1,10 @@
 import { Tabs } from 'expo-router';
 import { CalendarCheck, LayoutGrid, Settings, TrendingUp } from 'lucide-react-native';
-import { useColorScheme } from 'react-native';
+import { useColorScheme } from '@/components/useColorScheme';
 
 export default function TabLayout() {
-  const dark = useColorScheme() === 'dark';
+  const scheme = useColorScheme();
+  const dark = scheme === 'dark';
   const tint = dark ? '#fff' : '#111';
 
   return (
@@ -12,6 +13,15 @@ export default function TabLayout() {
         headerShown: false,
         tabBarActiveTintColor: tint,
         tabBarInactiveTintColor: '#9ca3af',
+        tabBarStyle: {
+          backgroundColor: dark ? 'rgba(10,10,10,0.92)' : 'rgba(255,255,255,0.92)',
+          borderTopColor: 'rgba(128,128,128,0.28)',
+          borderTopWidth: 1,
+          height: 84,
+          paddingBottom: 20,
+          paddingTop: 8,
+        },
+        tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
       }}
     >
       <Tabs.Screen

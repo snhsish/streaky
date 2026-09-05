@@ -1,7 +1,8 @@
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { Minus, Plus } from 'lucide-react-native';
 import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View, useColorScheme } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useColorScheme } from '@/components/useColorScheme';
 import ColorDotPicker from '@/components/ColorDotPicker';
 import EmojiPicker from '@/components/EmojiPicker';
 import GlassCard from '@/components/GlassCard';
